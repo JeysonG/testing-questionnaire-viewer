@@ -1,28 +1,34 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <pf-landing-page-questionnaires
+      :token="token"
+      :type="type"
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import { PfLandingPageQuestionnaires } from '@brevortriverstudios/vue-core'
 export default {
   name: 'app',
+
+  data () {
+    return {
+      token: '',
+      type: ''
+    }
+  },
+
   components: {
-    HelloWorld
+    PfLandingPageQuestionnaires
+  },
+
+  created () {
+    let paramsUrl = location.search
+    let params = new URLSearchParams(paramsUrl)
+
+    this.token = params.get('token')
+    this.type = params.get('type')
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
